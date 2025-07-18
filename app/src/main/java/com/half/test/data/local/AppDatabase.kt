@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.half.test.data.local.dao.ClickRecordDao
-import com.half.test.data.model.ClickRecord
+import com.half.test.data.local.entity.ClickRecordEntity
 
-@Database(entities = [ClickRecord::class], version = 1, exportSchema = false)
+@Database(entities = [ClickRecordEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun clickRecordDao() : ClickRecordDao
 

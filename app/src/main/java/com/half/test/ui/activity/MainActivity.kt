@@ -1,6 +1,7 @@
 package com.half.test.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -14,6 +15,8 @@ import com.half.test.ui.viewmodel.ClickViewModelFactory
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+
+    val TAG = "MainActivity"
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: ClickViewModel by viewModels {
@@ -34,14 +37,17 @@ class MainActivity : AppCompatActivity() {
     private fun setupUI() {
 
         binding.btnAddRecord.setOnClickListener {
+            Log.d(TAG, "btnAddRecord")
             viewModel.addRecord("按钮点击记录")
         }
 
         binding.btnSync.setOnClickListener {
+            Log.d(TAG, "btnSync")
             viewModel.syncRecords()
         }
 
         binding.btnRefresh.setOnClickListener {
+            Log.d(TAG, "btnRefresh")
             viewModel.refreshRecords()
         }
     }

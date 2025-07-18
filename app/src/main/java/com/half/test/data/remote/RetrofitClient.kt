@@ -8,7 +8,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    private const val BASE_URL = ""
+    private const val BASE_URL = "https://mysql2.sqlpub.com:3307"
     private const val TIMEOUT = 30L
 
     val instance : ClickApiService by lazy {

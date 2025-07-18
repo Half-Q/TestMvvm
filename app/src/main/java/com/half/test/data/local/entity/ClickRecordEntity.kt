@@ -1,5 +1,6 @@
 package com.half.test.data.local.entity
 
+import android.util.Log
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.half.test.data.model.ClickRecord
@@ -12,7 +13,9 @@ data class ClickRecordEntity (
     val content: String,
     val isSynced: Boolean = false
 ) {
+
     fun toClickRecord(): ClickRecord {
+        Log.d("ClickRecordEntity", "toClickRecord")
         return ClickRecord(
             id = remoteId,
             localId = localId,
@@ -24,6 +27,7 @@ data class ClickRecordEntity (
 
     companion object {
         fun fromClickRecord(record: ClickRecord): ClickRecordEntity {
+            Log.d("ClickRecordEntity", "fromClickRecord")
             return ClickRecordEntity(
                 localId = record.localId,
                 remoteId = record.id,

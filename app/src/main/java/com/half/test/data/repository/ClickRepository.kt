@@ -1,5 +1,6 @@
 package com.half.test.data.repository
 
+import android.util.Log
 import com.half.test.data.local.dao.ClickRecordDao
 import com.half.test.data.local.entity.ClickRecordEntity
 import com.half.test.data.model.ClickRecord
@@ -15,8 +16,10 @@ class ClickRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: ClickRecordDao
 ){
+    val TAG = "ClickRepository"
     // 获取所有记录（本地数据库）
     fun getAllRecord(): Flow<List<ClickRecord>> {
+        Log.d(TAG, "getAllRecord")
         return localDataSource.getAllRecord().map {
             entities -> entities.map { it.toClickRecord() }
         }
@@ -24,6 +27,7 @@ class ClickRepository @Inject constructor(
 
     // 添加新纪录
     suspend fun addNewRecord(content : String) {
+        Log.d(TAG, "addNewRecord:  ${content}")
         val timestamp = Date().toString()
         val record = ClickRecord(
             timestamp = timestamp,
@@ -34,12 +38,14 @@ class ClickRepository @Inject constructor(
 
     // 保存记录到本地
     private suspend fun saveRecordLocally(record: ClickRecord) {
+        Log.d(TAG, "saveRecordLocally:  ${record}")
         val entity = ClickRecordEntity.fromClickRecord(record)
         localDataSource.insert(entity)
     }
 
     // 同步未同步的记录
     suspend fun syncRecords() : NetworkStatus<Unit> {
+        Log.d(TAG, "syncRecords")
         val unSyncedRecords = localDataSource.getUnsyncedRecords()
             .map {it.toClickRecord()}
 

@@ -1,7 +1,9 @@
 package com.half.test.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.half.test.data.local.entity.ClickRecordEntity
 import com.half.test.data.repository.ClickRepository
 import com.half.test.ui.state.UiState
 import com.half.test.util.NetworkStatus
@@ -14,12 +16,19 @@ class ClickViewModel(
     private val repository: ClickRepository
 ): ViewModel() {
 
+    val TAG = "ClickViewModel";
+
+    // 记录列表的可观察数据（实时更新）
+    private val _records = MutableStateFlow<List<ClickRecordEntity>>(emptyList())
+    val records: StateFlow<List<ClickRecordEntity>> = _records.asStateFlow()
+
     // UI状态
     private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     // 添加新纪录
     fun addRecord(content : String) {
+        Log.d(TAG, "addRecord")
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             try {
