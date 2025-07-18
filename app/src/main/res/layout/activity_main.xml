@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    tools:context=".ui.activity.MainActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.half.test.ui.viewmodel.ClickViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:background="@android:color/darker_gray">
+
+            <TextView
+                android:id="@+id/tvRecords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                tools:text="2023-10-15 14:30:00 - 按钮点击记录 (已同步)\n2023-10-15 14:31:00 - 按钮点击记录 (未同步)" />
+        </ScrollView>
+
+        <!-- 进度指示器 -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+        <!-- 操作按钮区域 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnAddRecord"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="添加记录"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnRefresh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="刷新"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnSync"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="同步"/>
+        </LinearLayout>
+
+        <!-- 状态信息 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="本地数据库: Room (SQLite抽象层)\n远程数据库: MySQL (通过Retrofit访问)"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"/>
+
+
+    </LinearLayout>
+
+</layout>

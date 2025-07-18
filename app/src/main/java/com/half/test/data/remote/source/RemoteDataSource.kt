@@ -22,4 +22,19 @@ class RemoteDataSource(private val apiService: ClickApiService) {
         }
     }
 
+    suspend fun fetchHistory(): NetworkStatus<List<ClickRecord>> {
+        return try {
+            val response = apiService.getClickHistory()
+
+            if (response.isSuccessful && response.body() != null) {
+                val record = response.body()!!.map { it.toClickRecord() }
+                NetworkStatus.Success(record)
+            } else{
+                NetworkStatus.Error("Failed to fetch history: ${response.code()}")
+            }
+        } catch (e: Exception) {
+            NetworkStatus.Error(e.message ?: "Network error")
+        }
+    }
+
 }
