@@ -1,3 +1,4 @@
+```text
 app/
 ├── src/
 │   ├── main/
@@ -38,3 +39,4 @@ app/
 │   │   │   └── layout/
 │   │   │       └── activity_main.xml
 │   │   └── AndroidManifest.xml
+```
